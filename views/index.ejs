@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/javascripts/index.js"></script>
+</head>
+
+<body>
+    <div id="background1">
+        <div id="background2"> </div>
+        <div id="background3"> </div>
+        <div id="mainKaBaap">
+
+
+            <div onclick="doThis()" id="wind2">
+                <div id="info2">
+
+                    <label>Enter a Name : </label>
+                    <input type="text" autocomplete="off">
+                    <label>Enter a Number: </label>
+                    <input autocomplete="off" type="number" pattern="[0-9]{10}" title="123-4567-890">
+                    <button id="save" onclick="save()" type="button">Save</button>
+                </div>
+            </div>
+
+            <div id="mainWind">
+                <div id="header">
+                    <div id="profile">
+                        <div onclick="funcProf()" id="profDiv">
+                            <img src="/images/prof1 (2).png">
+                        </div>
+                        <div id="myInfo">
+                            <p>Welcome <%= a %></p>
+                        </div>
+                        <div id="addFrnd0"> <img id="addFrnd1" onclick="saveNo()" src="/images/a.jpg"> </div>
+                    </div>
+                    <div id="contactInfo">
+                        <div id="yourSelf">
+                            <img class="yourImg">
+                            <p></p>
+                            <div id="yourSelfChild">
+                                <div onclick="sendSomething()">
+                                    <img src="/images/oip.png">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="sendSomeMed">
+                    <div id="send1Div">
+                        <img onclick="selectPV()" title="Photos and Videos" src="/images/fileManage.png">
+                        <input type="file" style="display: none;" id="input1a" accept="image/png, image/jpeg, image/jpg"
+                            onchange="sendThisFiles()" multiple>
+                        <img title="Documents" src="/images/circle-cropped.png">
+                    </div>
+                </div>
+                <div id="mainCont">
+                    <div id="myProfile">
+                        <div class="div1"></div>
+                        <div id="myImage44">
+                            <div id="options44">
+                                <p onclick="showThis()">View photo</p>
+                                <p>Take photo</p>
+                                <input id="fileSel" accept="image/png, image/jpeg, image/jpg" onchange="uploadIt()"
+                                    type="file" style="display: none;">
+                                <p>Upload photo</p>
+                                <p onclick="deleteThis()">Remove photo</p>
+                            </div>
+                            <div id="myImg44">
+                                <img src="/images/prof1 (2).png">
+                            </div>
+                        </div>
+                        <form action="http://localhost:3000/logout" method="GET">
+                            <div id="itMain">
+                                <div class="butDiv"><button onclick="impBut()">LogOut</button></div>
+                            </div>
+                        </form>
+                    </div> <!-- your profile -->
+                    <div id="contacts">
+                        <div id="toTake">
+                            <input type="text" placeholder="Search a contact">
+                            <img src="/images/b.png">
+                        </div>
+                        <div id="allChats">
+                        </div>
+                    </div>
+                    <div id="Previews">
+                        <div id="prev3"> 
+                            <img onclick="finallySend()" src="/images/send.png">
+                        </div>
+                        <div id="prev2"> </div>
+                        <div id="prev1">
+                            <div id='prevDiv1'>
+                                <a> <img onclick="leftClick()" src="/images/arrow.png"> </a>
+                            </div>
+                            <div id="prevDiv2">
+                            </div>
+                            <div id='prevDiv3'>
+                                <a> <img onclick="rightClick()" src="/images/arrow.png"> </a>
+                            </div>
+                        </div>
+                        <div id="prev4">
+                            <p>Preview</p>
+                            <img onclick="closeIt()" src="/images/cross1.png">
+                        </div>
+                    </div>
+                    <div onclick="hideIt()" id="messages">
+                        <div id="sendIt">
+                            <input placeholder="Type a message">
+                            <img onclick="sendIt()" src="/images/send.png">
+                        </div>
+                        <!-- <div id="messagesSent">
+
+                        </div> -->
+                    </div>
+                    <div id="sideProfile">
+                        <div id="urImg">
+                            <div id="urImg1">
+                                <img src="/images/prof1 (2).png">
+                            </div>
+                            <div id="nameAndNum">
+                                <P></P>
+                                <p></p>
+                            </div>
+                        </div>
+
+                        <div id="urFeatures"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% if(din.ind == 0) { %>
+        <div id="popup">
+            <div id="insidePop">
+                <div id="div1">
+                    <label class="lab1">First Name:</label><input type="text">
+                </div>
+                <div id="div2">
+                    <label>Last Name:</label><input type="text">
+                </div><br>
+                <span onclick="butt()" id="butt">Submit</span>
+            </div>
+        </div>
+        <% } %>
+        <div id="popup1">
+            <div id="insidePop1">
+                <div id="crossPop1"><img onclick="closeThis()" src="/images/cross.png"></div>
+                <img src="/images/send.png">
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/a.css">
+    <script>
+        $(document).ready(function () {
+            $("#pass1").keyup(() => {
+                var dope = $("#pass1")[0].value.length;
+                if (dope < 1) {
+                    console.log("weak");
+                    $("#pop2")[0].innerHTML = "";
+                    $("#pop2")[0].style.color = "black";
+                } else if (dope < 6 && dope > 1) {
+                    console.log("weak");
+                    $("#pop2")[0].innerHTML = "weak";
+                    $("#pop2")[0].style.color = "rgb(175,0,0,1)";
+                } else if (dope >= 6 && dope <= 11) {
+                    console.log("good");
+                    $("#pop2")[0].innerHTML = "good";
+                    $("#pop2")[0].style.color = "orange";
+                } else if (dope > 11) {
+                    console.log("strong");
+                    $("#pop2")[0].innerHTML = "strong";
+                    $("#pop2")[0].style.color = "green";
+                }
+            })
+
+
+
+            var val11 = document.getElementsByTagName("input")[1];
+            var val1 = document.getElementsByTagName("input")[4];
+            var val21 = document.getElementsByTagName("label")[5];
+            var val2 = document.getElementsByTagName("input")[5];
+            var val3 = document.getElementsByTagName("p")[2]
+            var butt2 = document.getElementsByTagName("button")[1];
+            $([val2, val1]).keyup(() => {
+                if (val2.value != val1.value) {
+                    // val3.innerHTML = "paswords doesn't match";
+                    val21.style.color = "rgb(175,0,0,1)";
+                    val2.style.borderBottomColor = "rgb(175,0,0,1)";
+                    butt2.setAttribute("disabled", "");
+                } else {
+                    // val3.innerHTML = "";
+                    val21.style.color = "rgb(116, 116, 116)";
+                    val2.style.borderBottomColor = "black";
+                    butt2.removeAttribute("disabled");
+                }
+            })
+
+
+            var doop1 = $(".toggle-password2") //LogIN
+            doop1.click(() => {
+                doop1.toggleClass("fa-eye-slash fa-eye");
+                if (val11.type == "password") {
+                    val11.type = "text";
+                }
+                else {
+                    val11.type = "password";
+                }
+            })
+
+            var doop2 = $(".toggle-password") //signup
+            doop2.click(() => {
+                doop2.toggleClass("fa-eye-slash fa-eye");
+                if (val1.type == "password") {
+                    val1.type = "text";
+                    val2.type = "text";
+                }
+                else {
+                    val1.type = "password";
+                    val2.type = "password";
+                }
+            })
+
+
+            // var doop3 = $(".toggle-password3") //signup
+            // doop3.click(() => {
+            //     doop3.toggleClass("fa-eye-slash fa-eye");
+            //     if (val2.type == "password") {
+            //         val2.type = "text";
+            //     }
+            //     else {
+            //         val2.type = "password";
+            //     }
+            // })
+
+        })
+
+        // function authenticate() {
+        //     var rand = (Math.random() * 61278648756318856) + 286734859763875;
+        //     console.log(rand);
+        //     fetch("http://localhost:3000/boom", {
+        //         method: "POST",
+        //         headers: { "Content-Type": "application/json" },
+        //         body: JSON.stringify({ a: rand })
+        //     })
+        // }
+
+        // function checkBox() {
+        //     var a = document.getElementById("check").value;
+        //     var b = 1;
+        // if(b/2 == 0){
+        //     a = "off"
+        // }else{
+        //     a = "on"
+        // }
+        //     b++;res.cookie("users",users)
+        //     console.log(a);
+            
+        // }
+        // function logIn() {
+        //     var number = document.getElementById("inpNum").value;
+        //     var pin = document.getElementById("inpPin").value;
+        //     var check = document.getElementById("check").value;
+        //     console.log(number, pin, check);
+
+        //     // fetch("/login", {
+        //     //     method: "POST",
+        //     //     headers: { "Content-Type": "application/json" },
+        //     //     body: JSON.stringify({ number: })
+        //     // })
+        // }
+
+       function makeSession(){
+           var num = document.getElementById("inpNum").value;
+           sessionStorage.setItem("foo","bar")
+           localStorage.setItem("mynum",num)
+       }
+    </script>
+
+</head>
+
+<body>
+    <div id="mainBody">
+        <form action="/login" method="GET">
+            <div id="logIn" class="same1">
+                <h2>LOG IN</h2>
+                <label class="lab1">Enter your number :</label><br> <input id="inpNum" value="8800552449" class="inp1"
+                    autocomplete="off" type="text" pattern="[0-9]{10}" name="number">
+                <!-- <p>Format: 123-4567-890</p> -->
+                <label class="lab1">password :</label>&nbsp;&nbsp; <br> <i
+                    class="fa fa-eye-slash toggle-password2"></i><input class="inp1" id="inpPin" autocomplete="off"
+                    value="0000" type="password" name="pin">
+                <input id="check" type="checkbox"  name="check"><label class="lab2">
+                    Remember me</label><br>
+                <button onclick="makeSession()" >LOG IN</button>
+                <% if(dodo.a == 2.8){ %>
+                <p id="error1">Logged Out</p>
+                <% } %>
+                <!-- <% if(dodo.a == 2.21){ %>
+                <p id="error1">Log in again</p>
+                <% } %> -->
+                <% if(dodo.a == 2.2){ %>
+                <p id="error1">wrong login details</p>
+                <% } %>
+                <% if(dodo.a == 2){ %>
+                <p id="error1">Account not exsist</p>
+                <% }else{  %>
+                <p id="error1"></p>
+                <%   } %>
+            </div>
+        </form>
+        <form action="/signup" method="GET">
+            <div id="signup" class="same1">
+                <h2>Don't have an account ?</h2>
+                <label class="lab1">Enter your number :</label><br> <input class="inp2" autocomplete="off" type="text"
+                    pattern="[0-9]{10}" name="number">
+                <!-- <p>Format: 123-4567-890</p> -->
+                <label class="lab1">password :</label>&nbsp;&nbsp;<br> <i class="fa fa-eye-slash toggle-password"></i>
+                <input class="inp2" value="" autocomplete="off" id="pass1" type="password" name="pin">
+                <label class="lab1">Confirm password :</label>&nbsp;&nbsp;
+                <!-- <br> <i class="fa fa-eye-slash toggle-password3"></i> --> <input value="" class="inp2" id="pass1"
+                    type="password" name="pin2">
+                <p id="pop2"></p>
+                <button id="but2">SIGN UP</button>
+                <% if(dodo.a == 1){ %>
+                <p id="error">contact already exsisted</p>
+                <% } else if(dodo.a == 1.1){ %>
+                <p id="error">Signed up successfully</p>
+                <% } else if(dodo.a == 1.3){ %>
+                <p id="error">Name or password can't be Empty</p>
+                <% }else{  %>
+                <p id="error"></p>
+                <%   } %>
+            </div>
+        </form>
+
+        <!-- <div id="sec1">
+    <label class="lab1">First Name :</label><br>
+    <input class="inp2" type="text"><br>
+    <label class="lab1">Last Name :</label><br>
+    <input class="inp2" type="text">
+</div> -->
+
+    </div>
+</body>
+
+</html>
