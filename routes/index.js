@@ -32,7 +32,6 @@ Mg.connect(url, { useUnifiedTopology: true }, (err, db) => {
     console.log(dbo);
 
     app.get("/", (req, res) => {
-
         var cook = req.cookies.users;
         // console.log(cook);
 
