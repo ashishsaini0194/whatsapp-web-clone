@@ -11,9 +11,9 @@ socket.on("connection", () => {
 })
 
 
-//message is recieved
 
-socket.on(myNum, (data) => {
+
+socket.on(myNum, (data) => { //message is recieved
     if (data.idn == 11) {
         console.log(myNum);
         console.log(data.mess);
@@ -28,7 +28,8 @@ socket.on(myNum, (data) => {
                 a1.setAttribute("id", "rM")
 
                 var a2 = document.createElement("div");
-                a2.setAttribute("id", "rM1")
+                a2.setAttribute("id", `rMa${rMaIdn}`)
+                ++rMaIdn;
                 var b1 = document.createElement("p");
                 b1.innerText = data.mess;
 
@@ -476,6 +477,7 @@ function makeThis() {
     document.getElementById("messages").appendChild(messagesSent)
     // }
 }
+
 function sendIt() {
     console.log(everything);
 
@@ -494,7 +496,8 @@ function sendIt() {
                 a1.setAttribute("id", "sM")
 
                 var a2 = document.createElement("div");
-                a2.setAttribute("id", "sM1")
+                a2.setAttribute("id", `sMa${smaKaIdn}`)
+                ++smaKaIdn;
                 var b1 = document.createElement("p");
                 b1.innerText = value;
                 a2.appendChild(b1)
@@ -562,7 +565,7 @@ function uploadIt() {
 
                         document.getElementById("myImg44").getElementsByTagName("img")[0].src = `data:image/png;base64,${data.a}`
                         document.getElementById("profDiv").getElementsByTagName("img")[0].src = `data:image/png;base64,${data.a}`
-                        document.getElementById("insidePop1").getElementsByTagName("img")[1].src = `data:image/png;base64,${data.a}`
+                        document.getElementById("insidePop1").getElementsByTagName("img")[2].src = `data:image/png;base64,${data.a}`
                     })
                 })
                 .catch((err) => {
@@ -598,7 +601,7 @@ function downloadImg() {
                     console.log(data.b);
                     document.getElementById("myImg44").getElementsByTagName("img")[0].src = `data:image/png;base64,${data.a}`
                     document.getElementById("profDiv").getElementsByTagName("img")[0].src = `data:image/png;base64,${data.a}`
-                    document.getElementById("insidePop1").getElementsByTagName("img")[1].src = `data:image/png;base64,${data.a}`
+                    document.getElementById("insidePop1").getElementsByTagName("img")[2].src = `data:image/png;base64,${data.a}`
 
 
                     //for Clients
@@ -628,6 +631,7 @@ function showThis() {
 }
 function closeThis() {
     document.getElementById("popup1").style.display = "none";
+    document.getElementById("popup2").style.display = "none";
 }
 
 function deleteThis() {
@@ -645,7 +649,7 @@ function deleteThis() {
         .then((res) => {
             document.getElementById("myImg44").getElementsByTagName("img")[0].src = "/images/prof1 (2).png";
             document.getElementById("profDiv").getElementsByTagName("img")[0].src = "/images/prof1 (2).png";
-            document.getElementById("insidePop1").getElementsByTagName("img")[1].src = "/images/prof1 (2).png";
+            document.getElementById("insidePop1").getElementsByTagName("img")[2].src = "/images/prof1 (2).png";
         })
         .catch((err) => { console.log(err); })
 }
@@ -680,7 +684,13 @@ function sendSomething() {
 
 }
 
-function selectPV() {
+function selectPV(e) {
+    if (e == 'takeit1') {
+        document.getElementById("input1a").setAttribute("accept", "image/png, image/jpeg, image/jpg,image/gif")  //for images and videos
+    }
+    else if (e == 'takeit2') {
+        document.getElementById("input1a").setAttribute("accept", "text/*") // for docs
+    }
     document.getElementById("input1a").click()
     var chup = document.getElementById("prevDiv2");
     var Rbuttons = document.getElementById("prev2");
@@ -693,27 +703,6 @@ function selectPV() {
         Rbuttons.removeChild(Rbuttons.childNodes[0])
     } a++
 
-}
-var scrolledtop = 0;
-
-function leftClick() {
-    if (scrolledtop > 0) {
-        scrolledtop = scrolledtop - 1;
-        console.log(scrolledtop);
-        document.getElementById("prevDiv1").getElementsByTagName("a")[0].setAttribute("href", `#prev2Child${scrolledtop}`);
-        document.getElementById(`radio${scrolledtop}`).click();
-    }
-}
-function rightClick() {
-    var a1 = document.getElementById("prevDiv2").childNodes;
-    console.log(a1);
-    console.log("length is" + a1.length);
-    if (scrolledtop < a1.length - 1) {
-        scrolledtop = scrolledtop + 1;
-        console.log(scrolledtop);
-        document.getElementById("prevDiv3").getElementsByTagName("a")[0].setAttribute("href", `#prev2Child${scrolledtop}`);
-        document.getElementById(`radio${scrolledtop}`).click();
-    }
 }
 
 function closeIt() {
@@ -736,6 +725,7 @@ function closeIt() {
 
 }
 function sendThisFiles() { // this is preview of the selected images
+    scrolledtop = 0;
     var files = document.getElementById("input1a").files;
     if (files.length > 0) {
         hideIt()
@@ -744,13 +734,13 @@ function sendThisFiles() { // this is preview of the selected images
 
         console.log(files);
 
+        var parentDiv = document.getElementById("prevDiv2");
         for (var a = 0; a < files.length; a++) {
-            if (files[a].type == "image/png" || files[a].type == "image/jpeg" || files[a].type == "image/jpg") {
-                var parentDiv = document.getElementById("prevDiv2");
+            var lazy = files[a].type;
+            if (lazy == "image/png" || lazy == "image/jpeg" || lazy == "image/jpg" || lazy == "image/gif") { //images and videos
+                console.log(" type is img and mp4");
                 var div1 = document.createElement("div");
                 div1.setAttribute("id", `prev2Child${a}`)
-                // var iddiv1 = document.createElement("id", "prev2Child");
-                // div1.appendChild(iddiv1);
                 var img1 = document.createElement("img");
                 img1.src = URL.createObjectURL(files[a]);
                 console.log(URL.createObjectURL(files[a]));
@@ -767,7 +757,29 @@ function sendThisFiles() { // this is preview of the selected images
                 parent2.appendChild(aLink);
 
 
-                if (a == files.length - 1) {
+
+            }
+            if (files[a].type == "text/plain") { //docs
+                console.log(" type is text");
+                var div1 = document.createElement("div");
+                div1.setAttribute("id", `prev2Child${a}`)
+                var img1 = document.createElement("img");
+                img1.src = "/images/text1.png";
+                div1.appendChild(img1)
+                parentDiv.appendChild(div1);
+                img1.style.maxHeight = '100px';
+
+                var parent2 = document.getElementById("prev2"); //dots
+                var aLink = document.createElement("a");
+                aLink.setAttribute("href", `#prev2Child${a}`)
+                var radBut = document.createElement("div");
+                radBut.setAttribute("id", `radio${a}`);
+                aLink.appendChild(radBut);
+                parent2.appendChild(aLink);
+            }
+
+            if (a == files.length - 1) { // run at the end of this loop
+                if (parentDiv.childNodes.length > 0) {
                     document.getElementById("radio0").style.backgroundColor = "rgb(0, 174, 255)";
                     document.getElementById("radio0").style.borderColor = "rgb(0, 26, 255)";
                     $('[id^="radio"]').on("click", (e) => {
@@ -789,9 +801,31 @@ function sendThisFiles() { // this is preview of the selected images
     }
 }
 
+var scrolledtop = 0;
 
+function leftClick() {
+    if (scrolledtop > 0) {
+        console.log("scroll top was: " + scrolledtop);
+        scrolledtop = scrolledtop - 1;
+        console.log("scroll top now: " + scrolledtop);
+        document.getElementById("prevDiv1").getElementsByTagName("a")[0].setAttribute("href", `#prev2Child${scrolledtop}`);
+        document.getElementById(`radio${scrolledtop}`).click();
+    }
+}
+function rightClick() {
+    var a1 = document.getElementById("prevDiv2").childNodes;
+    console.log(a1);
+    console.log("length is" + a1.length);
+    if (scrolledtop < a1.length - 1) {
+        console.log("scroll top was: " + scrolledtop);
+        scrolledtop = scrolledtop + 1;
+        console.log("scroll top now: " + scrolledtop);
+        document.getElementById("prevDiv3").getElementsByTagName("a")[0].setAttribute("href", `#prev2Child${scrolledtop}`);
+        document.getElementById(`radio${scrolledtop}`).click();
+    }
+}
 
-
+var smaKaIdn = 0;
 function finallySend() { //finally files will be send to the other client
 
 
@@ -808,14 +842,45 @@ function finallySend() { //finally files will be send to the other client
                     a1.setAttribute("id", "sM")
 
                     var a2 = document.createElement("div");
-                    a2.setAttribute("id", "sM1")
+                    a2.setAttribute("id", `sMa${smaKaIdn}`)
+                    smaKaIdn += 1;
                     var b1 = document.createElement("img");
-                    b1.src = URL.createObjectURL(files[loopy]);
-                    a2.appendChild(b1)
+                    if (files[loopy].type == "image/png" || files[loopy].type == "image/jpeg" || files[loopy].type == "image/jpg" ||
+                        files[loopy].type == "image/gif") { //images and videos )
+                        b1.src = URL.createObjectURL(files[loopy]);
+                        a2.appendChild(b1)
+                        a1.appendChild(a2);
+                        idn = document.getElementById(`messagesSent${everything[loop].number}`);
+                        idn.appendChild(a1);
 
-                    a1.appendChild(a2);
-                    idn = document.getElementById(`messagesSent${everything[loop].number}`);
-                    idn.appendChild(a1);
+                    }
+                    else if (files[loopy].type == "text/plain") { //images and videos )
+                        b1.src = "/images/text2.png";
+                        b1.style.maxHeight = "80px"
+                        var docDiv = document.createElement("div");
+                        docDiv.setAttribute("class", "docDiv");
+                        var docDivfn = document.createElement("p");
+
+                        if (files[loopy].name > 18) { //to slice the name of file
+                            docDivfn.innerText = files[loopy].name.slice(0, 16) + "...";
+                        } else {
+                            docDivfn.innerText = files[loopy].name;
+                        }
+
+                        var docDivfn2 = document.createElement("p");
+                        docDivfn2.innerText = files[loopy].type;
+                        var docDivimg = document.createElement("img");
+                        docDivimg.src = "/images/download.png"
+                        docDiv.appendChild(b1);
+                        docDiv.appendChild(docDivfn);
+                        docDiv.appendChild(docDivfn2);
+                        docDiv.appendChild(docDivimg);
+                        a2.appendChild(docDiv);
+                        a1.appendChild(a2);
+                        idn = document.getElementById(`messagesSent${everything[loop].number}`);
+                        idn.appendChild(a1);
+                    }
+
                     idn.style.display = "block";
                     document.getElementById("sendIt").getElementsByTagName('input')[0].value = "";
 
@@ -823,11 +888,23 @@ function finallySend() { //finally files will be send to the other client
                         var scrollkiheight = idn.scrollHeight;
                         console.log(scrollkiheight);
                         idn.scrollTop = scrollkiheight;
+
                     }, 100)
+
+                    if (loopy == files.length - 1) {
+                        $("[id^='sMa']").click((e) => {
+                            console.log(e.target.currentSrc);
+                            if (e.target.currentSrc != undefined) {
+                                document.getElementById("insidePop2").getElementsByTagName("img")[2].src = e.target.currentSrc;
+                                document.getElementById("popup2").style.display = "flex";
+                            }
+                        })
+                    }
                 }
             }
         }
     }
+
 
 
     var doop = 0
@@ -841,10 +918,8 @@ function finallySend() { //finally files will be send to the other client
         var reader = new FileReader();
         reader.readAsArrayBuffer(files[doop]); //data to be sent
 
-
         var yourSelf = document.getElementById("yourSelf").getElementsByTagName("p")[0].innerText;
         var myName = document.getElementById("myInfo").getElementsByTagName("p")[0].innerText;
-        // console.log(myName);
         var myname1 = myName.split(" ")
         myName = myname1[myname1.length - 1];
         console.log(myName);
@@ -852,7 +927,7 @@ function finallySend() { //finally files will be send to the other client
         setTimeout(() => {
             for (var loop = 0; loop < everything.length; loop++) {
                 if (yourSelf == everything[loop].name) {
-
+                    // console.log(reader.result);
                     socket.emit("tryThis", { buffData: reader.result, sender: myNum, senderName: myName, client: everything[loop].number, fileType: ft, fileName: fn });
                 }
             }
@@ -866,11 +941,19 @@ function finallySend() { //finally files will be send to the other client
         }
     }
     justLoop();
-
 }
 
+function downloadThis() {
+    console.log("boom download chla");
+    document.getElementById("download1").getElementsByTagName("a")[0].href = document.getElementById("insidePop2").getElementsByTagName("img")[2].src;
+}
+function downloadThis1() {
+    console.log("boom download 1 chla");
+    document.getElementById("download").getElementsByTagName("a")[0].href = document.getElementById("insidePop1").getElementsByTagName("img")[2].src;
+}
 
-socket.on(myNum, (data) => { //to recieve files from B to A
+var rMaIdn = 0;
+socket.on(myNum, (data) => { //to recieve files from B to A (media files)
     if (data.idn = 22) {
         console.log(myNum);
         console.log(data.a);
@@ -887,10 +970,18 @@ socket.on(myNum, (data) => { //to recieve files from B to A
                 a1.setAttribute("id", "rM")
 
                 var a2 = document.createElement("div");
-                a2.setAttribute("id", "rM1")
+                a2.setAttribute("id", `rMa${rMaIdn}`)
+                ++rMaIdn;
                 var b1 = document.createElement("img");
-                b1.src = `data:image/png;base64,${data.a}`;
-
+                if (data.a3 == "image/png" || data.a3 == "image/jpeg" || data.a3 == "image/jpg" ||
+                    data.a3 == "image/gif") { //images and videos )
+                    b1.src = `data:image/png;base64,${data.a}`;
+                    // b1.src = URL.createObjectURL(data.a);
+                }
+                else if (data.a3 == "text/plain") {
+                    b1.src = "/images/text1.png"
+                    b1.style.maxHeight = "80px";
+                }
                 var idn;
                 a2.appendChild(b1)
 
@@ -918,6 +1009,16 @@ socket.on(myNum, (data) => { //to recieve files from B to A
                     }
                 }
 
+
+                $("[id^='rMa']").click((e) => { //to put into insidePop
+                    console.log(e.target.currentSrc);
+                    if (e.target.currentSrc != undefined) {
+                        document.getElementById("insidePop2").getElementsByTagName("img")[2].src = e.target.currentSrc;
+                        document.getElementById("popup2").style.display = "flex";
+                    }
+                })
+
+
                 setTimeout(() => { //to scroll after messages displayed
                     var scrollkiheight = idn.scrollHeight;
                     console.log(scrollkiheight);
@@ -942,5 +1043,7 @@ function hideIt() {
         b[c].style.width = "0px"
     }
 }
+
+
 
 

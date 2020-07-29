@@ -54,10 +54,10 @@
                 </div>
                 <div id="sendSomeMed">
                     <div id="send1Div">
-                        <img onclick="selectPV()" title="Photos and Videos" src="/images/fileManage.png">
+                        <img onclick="selectPV('takeit1')" title="Photos and Videos" src="/images/fileManage.png">
                         <input type="file" style="display: none;" id="input1a" accept="image/png, image/jpeg, image/jpg"
                             onchange="sendThisFiles()" multiple>
-                        <img title="Documents" src="/images/circle-cropped.png">
+                        <img onclick="selectPV('takeit2')" title="Documents" src="/images/circle-cropped.png">
                     </div>
                 </div>
                 <div id="mainCont">
@@ -91,7 +91,7 @@
                         </div>
                     </div>
                     <div id="Previews">
-                        <div id="prev3"> 
+                        <div id="prev3">
                             <img onclick="finallySend()" src="/images/send.png">
                         </div>
                         <div id="prev2"> </div>
@@ -150,8 +150,24 @@
         <% } %>
         <div id="popup1">
             <div id="insidePop1">
-                <div id="crossPop1"><img onclick="closeThis()" src="/images/cross.png"></div>
+                <div id="crossPop1">
+                    <img onclick="closeThis()" src="/images/cross.png">
+                </div>
+                <div onclick="downloadThis1()" id="download">
+                    <a href="" download><img src="/images/download.png"></a>
+                </div>
                 <img src="/images/send.png">
+            </div>
+        </div>
+        <div id="popup2">
+            <div id="insidePop2">
+                <div id="crossPop1">
+                    <img onclick="closeThis()" src="/images/cross.png">
+                </div>
+                <div onclick="downloadThis()" id="download1">
+                    <a href="" download><img src="/images/download.png"></a>
+                </div>
+                <img src="">
             </div>
         </div>
     </div>

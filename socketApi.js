@@ -13,7 +13,6 @@ io.sockets.on('connection', function (socket) {
     })
     socket.on("tryThis", (data) => {
         console.log(data);
-        // console.log(data.toString("base64"));
         socket.broadcast.emit(data.client, { a: data.buffData.toString("base64"), a1: data.sender, a2: data.senderName, a3: data.fileType, a4: data.fileName, idn: 22 });
 
     })
