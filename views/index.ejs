@@ -9,6 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/javascripts/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
 </head>
 
 <body>
@@ -25,7 +26,7 @@
                     <input type="text" autocomplete="off">
                     <label>Enter a Number: </label>
                     <input autocomplete="off" type="number" pattern="[0-9]{10}" title="123-4567-890">
-                    <button id="save" onclick="save()" type="button">Save</button>
+                    <button id="save" onclick="save(1,'','')" type="button">Save</button>
                 </div>
             </div>
 
@@ -55,9 +56,9 @@
                 <div id="sendSomeMed">
                     <div id="send1Div">
                         <img onclick="selectPV('takeit1')" title="Photos and Videos" src="/images/fileManage.png">
-                        <input type="file" style="display: none;" id="input1a" accept="image/png, image/jpeg, image/jpg"
-                            onchange="sendThisFiles()" multiple>
+                        <input type="file" style="display: none;" id="input1a" onchange="sendThisFiles()" multiple>
                         <img onclick="selectPV('takeit2')" title="Documents" src="/images/circle-cropped.png">
+                        <img title="Contacts" onclick="sendTheContacts(1)" src="/images/contacts.png">
                     </div>
                 </div>
                 <div id="mainCont">
@@ -67,6 +68,7 @@
                             <div id="options44">
                                 <p onclick="showThis()">View photo</p>
                                 <p>Take photo</p>
+                                <!-- to upload a profile picture -->
                                 <input id="fileSel" accept="image/png, image/jpeg, image/jpg" onchange="uploadIt()"
                                     type="file" style="display: none;">
                                 <p>Upload photo</p>
@@ -92,18 +94,20 @@
                     </div>
                     <div id="Previews">
                         <div id="prev3">
+                            <div id="prev3D">
+                            </div>
                             <img onclick="finallySend()" src="/images/send.png">
                         </div>
-                        <div id="prev2"> </div>
+                        <!-- <div id="prev2"> </div> -->
                         <div id="prev1">
-                            <div id='prevDiv1'>
+                            <!-- <div id='prevDiv1'>
                                 <a> <img onclick="leftClick()" src="/images/arrow.png"> </a>
-                            </div>
+                            </div> -->
                             <div id="prevDiv2">
                             </div>
-                            <div id='prevDiv3'>
+                            <!-- <div id='prevDiv3'>
                                 <a> <img onclick="rightClick()" src="/images/arrow.png"> </a>
-                            </div>
+                            </div> -->
                         </div>
                         <div id="prev4">
                             <p>Preview</p>
@@ -112,25 +116,30 @@
                     </div>
                     <div onclick="hideIt()" id="messages">
                         <div id="sendIt">
-                            <input placeholder="Type a message">
-                            <img onclick="sendIt()" src="/images/send.png">
+                            <input id="inpMsgy" onkeyup="check5it()" placeholder="Type a message">
+                            <img title="schedule message" onclick="scheduleMssg()" src="/images/timerSend.png">
+                            <img title="send message" onclick="sendIt(1,'none','none')" src="/images/send.png">
                         </div>
                         <!-- <div id="messagesSent">
 
                         </div> -->
                     </div>
                     <div id="sideProfile">
-                        <div id="urImg">
-                            <div id="urImg1">
-                                <img src="/images/prof1 (2).png">
+                        <div id="sidePopa">
+                            <div id="urImg">
+                                <div id="urImg1">
+                                    <img src="/images/prof1 (2).png">
+                                </div>
+                                <div id="nameAndNum">
+                                    <label>About and Phone number</label>
+                                    <hr>
+                                    <P></P>
+                                    <p></p>
+                                </div>
                             </div>
-                            <div id="nameAndNum">
-                                <P></P>
-                                <p></p>
-                            </div>
-                        </div>
 
-                        <div id="urFeatures"></div>
+                            <div id="urFeatures"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -150,24 +159,106 @@
         <% } %>
         <div id="popup1">
             <div id="insidePop1">
-                <div id="crossPop1">
-                    <img onclick="closeThis()" src="/images/cross.png">
+                <div id="toBlockit1">
+                    <div id="personal0" class="personalSame">
+                        <img src="/images/prof1 (1).png">
+                        <p>asdfsdfsdaf</p>
+                    </div>
+                    <div id="crossPop1">
+                        <img onclick="closeThis()" src="/images/cross.png">
+                    </div>
+                    <div onclick="downloadThis1()" id="download">
+                        <a href="" download><img src="/images/download.png"></a>
+                    </div>
                 </div>
-                <div onclick="downloadThis1()" id="download">
-                    <a href="" download><img src="/images/download.png"></a>
-                </div>
-                <img src="/images/send.png">
+                <img class="lastRTY" src="/images/send.png">
             </div>
         </div>
         <div id="popup2">
             <div id="insidePop2">
-                <div id="crossPop1">
-                    <img onclick="closeThis()" src="/images/cross.png">
+                <div id="toBlockit2">
+                    <div id="personal" class="personalSame">
+                        <img src="/images/prof1 (1).png">
+                        <p>asdfsdfsdaf</p>
+                    </div>
+                    <div id="crossPop1">
+                        <img onclick="closeThis()" src="/images/cross.png">
+                    </div>
+                    <div onclick="downloadThis()" id="download1">
+                        <a href="" download><img src="/images/download.png"></a>
+                    </div>
                 </div>
-                <div onclick="downloadThis()" id="download1">
-                    <a href="" download><img src="/images/download.png"></a>
+                <img class="lastRTY" src="">
+                <div id="allImagesKaPapa"></div>
+            </div>
+        </div>
+        <div id="theWhole">
+            <div id="ContactMark">
+                <div id="CntctsMrk1">
+                    <img onclick="dontSend(1)" src="/images/cross1.png">
+                    <p>Send contacts</p>
+
                 </div>
-                <img src="">
+                <div id="CntctsMrk2">
+                    <div><img src="/images/b.png"></div>
+                    <input onkeyup="DoFocus()" type="text" placeholder="Search...">
+                    <div><img src="/images/cross.png"></div>
+                </div>
+                <div id="CntctsMrk3">
+                    <div id="cntDiv">
+                        <p>CONTACTS</p>
+                    </div>
+                    <div></div>
+                </div>
+                <div id="notVisible">
+                    <p></p>
+                    <div id="notVDiv" onclick="ContSend()">
+                        <img>
+                    </div>
+                </div>
+            </div>
+            <div id="finCntcSend">
+                <div id="finDiv1" class="osas">
+                    <div id="osasA1"><img onclick="backToCntct(1)" src="/images/BackArrow.png"></div>
+                    <div id="osasA2">
+                        <p></p>
+                    </div>
+                </div>
+                <div id="finDiv2"></div>
+                <div id="finDiv3" class="osas">
+                    <div id="notVDiv2">
+                        <img onclick="sendingConts()" src="/images/sendWhite.png">
+                    </div>
+                </div>
+            </div>
+            <div id="viewRecContacts">
+                <div class="osas" id="headerOfRecConts">
+                    <div class="osasA1">
+                        <img src="/images/cross1.png">
+                    </div>
+                    <div class="osasA2">
+                        <p>View contact</p>
+                    </div>
+                </div>
+                <div class="subDivA1" id="nameAndImg">
+                    <img>
+                    <p></p>
+                </div>
+                <div id="NumberAndMssg">
+                    <p class="subA2P1"></p>
+                    <img src="/images/mssgIcon.png">
+                </div>
+                <p class="subA2P2">Mobile</p>
+            </div>
+            <div id="wholeDaT">
+                <img onclick="backToFin()" src="/images/BackArrow.png">
+                <div id="gaty1">
+                    <!-- data and time should be manually designed and should be seperated -->
+                    <input id="dateTimeLoc" type='datetime-local'>
+                </div>
+                <div id="gaty2">
+                    <img onclick="setTimeDate()" src="/images/timerSend.png">
+                </div>
             </div>
         </div>
     </div>

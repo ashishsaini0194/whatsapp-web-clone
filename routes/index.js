@@ -8,9 +8,6 @@ var cp = require("cookie-parser")
 var cors = require("cors");
 const formidable = require('formidable');
 var fs = require("fs");
-const { json } = require("express");
-const { log } = require("debug");
-
 
 
 
@@ -59,7 +56,7 @@ Mg.connect(url, { useUnifiedTopology: true }, (err, db) => {
                 console.log("cookies are empty");
                 res.render("a", dodo = { a: 0 })
             }
-        } catch{
+        } catch {
             console.log("cookies are empty");
             res.render("a", dodo = { a: 0 })
         }
@@ -205,13 +202,18 @@ Mg.connect(url, { useUnifiedTopology: true }, (err, db) => {
             }
             else {
                 for (var a = 0; a < body.length; a++) {
-                    if (body[a].number == req.body.un2, body[a].name == req.body.un1) {
+                    if (body[a].number == req.body.un2) { // when contact alerdy exists
+                        console.log(2.0);
+                        res.json({ ans: 0.1 })
+                        break;
+                    }
+                    if (body[a].name == req.body.un1) { // when names can't be same 
                         console.log(2);
                         res.json({ ans: 0 })
                         break;
                     }
                     if (a == body.length - 1) {
-                        if (body[a].number != req.body.un2, body[a].name != req.body.un1) {
+                        if (body[a].number != req.body.un2 && body[a].name != req.body.un1) {
                             console.log(3);
                             col.insertOne({ name: req.body.un1, number: req.body.un2 });
                             col.find({}).toArray((err, body) => {
@@ -303,7 +305,7 @@ Mg.connect(url, { useUnifiedTopology: true }, (err, db) => {
                                 console.log("try else");
                                 res.render("index", din = { a: "", b: "", ind: 0 })
                             }
-                        } catch{
+                        } catch {
                             console.log("catch");
 
                             // res.redirect("http://localhost:3000")
