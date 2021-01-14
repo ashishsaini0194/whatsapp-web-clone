@@ -20,8 +20,8 @@ var auth0 = null;
 
 
 
-// const url = "mongodb+srv://ashish:ashish@cluster0-lpaw9.mongodb.net/numbers?retryWrites=true&w=majority"; //online wala
-const url = "mongodb://localhost:27017/numbers";
+const url = "mongodb+srv://ashish:ashish@cluster0-lpaw9.mongodb.net/numbers?retryWrites=true&w=majority"; //online wala
+// const url = "mongodb://localhost:27017/numbers";
 Mg.connect(url, { useUnifiedTopology: true }, (err, db) => {
     if (err) throw err;
     console.log(db);
