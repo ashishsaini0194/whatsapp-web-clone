@@ -6,6 +6,11 @@
 - Hope u guys like it ..
 
 ## - Features
+
+### Sign up and login 
+![Screenshot 2021-09-29 133233](https://user-images.githubusercontent.com/55646729/135298573-44556f52-1270-4050-84c7-dc10013d5a4c.png)
+
+
 ### We can update, View, Remove profile photo and zoom using mouse movement.
 - Before updating profile picture
 
@@ -71,7 +76,14 @@ https://user-images.githubusercontent.com/55646729/135293742-74b71bad-3536-43da-
 
 ![Screenshot 2021-09-29 134726_LI](https://user-images.githubusercontent.com/55646729/135297386-266e3f04-6ce8-49f9-9759-32b770bd1841.jpg)
 
-###
+### Details of your saved contacts
+
+![Screenshot 2021-09-29 135728_LI](https://user-images.githubusercontent.com/55646729/135298375-abe002cb-0292-4e01-8c14-191810e5a8e3.jpg)
+
+#...Thank you, Hope you like it...
+
+
+
 
 
 
