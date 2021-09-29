@@ -1,5 +1,9 @@
 # chatApp
-A whatsapp web clone which works in node js and communication takes place through a very good JS library socket io .... Hope u guys like it ..
+- A whatsapp web clone which works in node js and communication takes place through a very good JS library socket io .... 
+
+- **To be a sender and reciever you have to use 2 different browsers ...**
+
+- Hope u guys like it ..
 
 ## - Features
 ### We can update, View, Remove profile photo and zoom using mouse movement.
@@ -50,6 +54,25 @@ https://user-images.githubusercontent.com/55646729/135293742-74b71bad-3536-43da-
 
 ![Screenshot 2021-09-29 134155](https://user-images.githubusercontent.com/55646729/135295810-c8a99d81-309a-46f6-8cd9-f9d6a593b1a5.png)
 
+### Message Scheduling
+
+- type a message and click on a button
+
+![Screenshot 2021-09-29 134856_LI](https://user-images.githubusercontent.com/55646729/135297266-bf7eff31-8aa7-4524-a90d-6a043a08157b.jpg)
+
+- select recipients and continue
+
+![Screenshot 2021-09-29 134336](https://user-images.githubusercontent.com/55646729/135297304-077bab33-c921-400a-828d-295100ea6548.png)
+![Screenshot 2021-09-29 134404](https://user-images.githubusercontent.com/55646729/135297339-7a3ef42b-b31f-4fa0-9a91-f1306bc1ad73.png)
+![Screenshot 2021-09-29 134542](https://user-images.githubusercontent.com/55646729/135297360-4fc13072-01ed-4da4-8a59-199c104ac3ce.png)
+
+
+- message recieved after 2 minutes 
+
+![Screenshot 2021-09-29 134726_LI](https://user-images.githubusercontent.com/55646729/135297386-266e3f04-6ce8-49f9-9759-32b770bd1841.jpg)
+
 ###
+
+
 
 
