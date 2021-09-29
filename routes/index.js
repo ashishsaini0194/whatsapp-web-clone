@@ -8,6 +8,8 @@ var cp = require("cookie-parser")
 var cors = require("cors");
 const formidable = require('formidable');
 var fs = require("fs");
+const path = require("path")
+require('dotenv').config({ path: path.resolve('.env') })
 
 
 
@@ -20,13 +22,13 @@ var auth0 = null;
 
 
 
-// const url = "mongodb+srv://ashish:ashish@cluster0-lpaw9.mongodb.net/numbers?retryWrites=true&w=majority"; //online wala
-const url = "mongodb://localhost:27017/numbers";
+const url = process.env.OFFLINE_URL;
+console.log(url);
 Mg.connect(url, { useUnifiedTopology: true }, (err, db) => {
     if (err) throw err;
-    console.log(db);
+    // console.log(db);
     var dbo = db.db("numbers")
-    console.log(dbo);
+    // console.log(dbo);
 
     app.get("/", (req, res) => {
         var cook = req.cookies.users;
